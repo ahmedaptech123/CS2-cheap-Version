@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Rajdhani", "Arial Narrow", sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  background: #06090f;
+  overflow: hidden;
+  font-family: var(--font-body);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.font-display { font-family: var(--font-display); }
+
+canvas.game-canvas {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  cursor: crosshair;
+}
+
+/* ---------- keyframes ---------- */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes feedIn {
+  from { opacity: 0; transform: translateX(30px) scale(0.96); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
+}
+@keyframes popIn {
+  0% { opacity: 0; transform: scale(1.6); }
+  60% { opacity: 1; transform: scale(0.94); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes hitmark {
+  0% { opacity: 1; transform: scale(1.5) rotate(45deg); }
+  100% { opacity: 0; transform: scale(0.8) rotate(45deg); }
+}
+@keyframes dmgPulse {
+  0% { opacity: 0.85; }
+  100% { opacity: 0; }
+}
+@keyframes scopeIn {
+  from { opacity: 0; transform: scale(1.15); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes menuSnow {
+  0% { transform: translateY(-10vh); }
+  100% { transform: translateY(110vh); }
+}
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+@keyframes bannerIn {
+  0% { opacity: 0; transform: scale(0.85); letter-spacing: 0.6em; }
+  100% { opacity: 1; transform: scale(1); letter-spacing: 0.18em; }
+}
+@keyframes toastIn {
+  0% { opacity: 0; transform: translateY(10px) scale(0.95); }
+  12% { opacity: 1; transform: translateY(0) scale(1); }
+  85% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-6px); }
+}
+@keyframes spinSlow { to { transform: rotate(360deg); } }
+
+.anim-fadeUp { animation: fadeUp 0.45s cubic-bezier(0.2, 0.9, 0.25, 1) both; }
+.anim-feedIn { animation: feedIn 0.25s cubic-bezier(0.2, 0.9, 0.25, 1) both; }
+.anim-popIn { animation: popIn 0.3s cubic-bezier(0.2, 0.9, 0.25, 1) both; }
+.anim-banner { animation: bannerIn 0.7s cubic-bezier(0.2, 0.9, 0.25, 1) both; }
+.anim-toast { animation: toastIn 2.6s ease both; }
+.anim-scope { animation: scopeIn 0.12s ease-out both; }
+
+/* damage vignette */
+.dmg-flash { animation: dmgPulse 0.7s ease-out both; }
+
+/* hitmarker */
+.hitmarker span {
+  position: absolute;
+  width: 11px;
+  height: 2.5px;
+  background: #fff;
+  box-shadow: 0 0 6px rgba(255,255,255,0.9);
+}
+.hitmarker.hs span { background: #ff4d4d; box-shadow: 0 0 8px rgba(255,60,60,1); }
+.hitmarker.kill span { background: #ff3b3b; box-shadow: 0 0 10px rgba(255,40,40,1); width: 14px; height: 3px; }
+
+/* scanline / tactical overlay texture */
+.tactical-bg {
+  background-image:
+    linear-gradient(rgba(120, 160, 220, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120, 160, 220, 0.05) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+.text-glow-blue { text-shadow: 0 0 18px rgba(90, 170, 255, 0.65); }
+.text-glow-amber { text-shadow: 0 0 18px rgba(255, 170, 60, 0.65); }
+
+/* range sliders */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255,255,255,0.18);
+  outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #7cc7ff;
+  box-shadow: 0 0 10px rgba(124,199,255,0.8);
+  cursor: pointer;
+}
+input[type="range"]::-moz-range-thumb {
+  width: 14px; height: 14px; border-radius: 50%;
+  background: #7cc7ff; border: none; cursor: pointer;
+}
+
+/* thin scrollbars */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 3px; }
